@@ -51,6 +51,8 @@ enum custom_keycodes {
   TMUX_SETUP,
 };
 
+const uint16_t PROGMEM alt_pause[] = {KC_A, KC_S, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {COMBO(alt_pause, LALT(KC_PAUSE))};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_ergodox_pretty(
