@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESCAPE,      KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_LCBR,                                        KC_RCBR,        KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_BSLASH,
     KC_LCTRL,       KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_SCOLON, KC_QUOTE,
     KC_LSHIFT,      KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,           KC_LPRN,                                        KC_RPRN,        KC_N,           KC_M,           KC_COMMA,       KC_DOT,         RCTL_T(KC_SLASH),KC_RSHIFT,
-    WEBUSB_PAIR,    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_LALT,                                                                                                        KC_RALT,        TMUX_SETUP, KC_TRANSPARENT, KC_TRANSPARENT, MO(1),
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_LALT,                                                                                                        KC_RALT,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, MO(1),
                                                                                                     KC_TRANSPARENT, KC_PAUSE,       KC_LALT,        LCTL_T(KC_ESCAPE),
                                                                                                                     KC_TRANSPARENT, KC_PGUP,
                                                                                     KC_ENTER, LT(1, KC_BSPACE),      KC_TRANSPARENT, KC_PGDOWN,      RCTL_T(KC_TAB),         KC_SPACE
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_EXLM,        KC_AT,          KC_LCBR,        KC_RCBR,        KC_PIPE,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_UP,          KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_TRANSPARENT,
     KC_TRANSPARENT, KC_HASH,        KC_DLR,         KC_LPRN,        KC_RPRN,        KC_GRAVE,                                                                       KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       KC_PLUS,        KC_TRANSPARENT,
     KC_TRANSPARENT, KC_PERC,        KC_CIRC,        KC_LBRACKET,    KC_RBRACKET,    KC_TILD,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_AMPR,        KC_1,           KC_2,           KC_3,           KC_BSLASH,      KC_TRANSPARENT,
-    RESET,          KC_EQUAL,       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_DOT,         KC_0,           KC_EQUAL,       KC_TRANSPARENT,
+    RESET,          KC_EQUAL,       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_DOT,         KC_KP_0,        KC_EQUAL,       KC_TRANSPARENT,
                                                                                                     RGB_MOD,        HSV_172_255_255,RGB_TOG,        RGB_SLD,
                                                                                                                     HSV_86_255_128, KC_TRANSPARENT,
                                                                                     KC_TRANSPARENT, RGB_VAI,        HSV_27_255_255, KC_TRANSPARENT, RGB_HUD,        RGB_HUI
@@ -112,18 +112,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         rgblight_mode(1);
         rgblight_sethsv(27,255,255);
-      }
-      return false;
-    case TMUX_SETUP:
-      if (record->event.pressed) {
-        SEND_STRING("tmux\n");
-        SEND_STRING(SS_DOWN(X_LCTL) "j" SS_UP(X_LCTL) "%");
-        SEND_STRING(SS_DOWN(X_LCTL) "j" SS_UP(X_LCTL) "\"");
-        SEND_STRING(SS_DOWN(X_LCTL) "j" SS_UP(X_LCTL) ":resize-pane -U 22\n");
-        SEND_STRING(SS_DOWN(X_LCTL) "j" SS_UP(X_LCTL) "k");
-        SEND_STRING(SS_DOWN(X_LCTL) "j" SS_UP(X_LCTL) "t");
-        SEND_STRING(SS_DOWN(X_LCTL) "j" SS_UP(X_LCTL) "j");
-        SEND_STRING(SS_DOWN(X_LCTL) "j" SS_UP(X_LCTL) "\"");
       }
       return false;
   }
